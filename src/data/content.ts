@@ -10,8 +10,8 @@ export const profile = {
   github: 'https://github.com/reinh20',
   // TODO: replace with your real LinkedIn URL.
   linkedin: 'https://www.linkedin.com/',
-  // Put your CV PDF at public/Reinbrandt_CV.pdf
   cvPath: './Reinbrandt_CV.pdf',
+  cvGoogleDocs: 'https://docs.google.com/document/d/1VwjZ-bs87stLsDLrJ9qSbik3IVrAco6tQi61O5Yx7fM/edit?usp=sharing',
 };
 
 export const about = [

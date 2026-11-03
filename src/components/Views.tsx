@@ -202,8 +202,11 @@ export function ContactView() {
         <a className={linkBtn} href={profile.linkedin} target="_blank" rel="noreferrer">
           <LinkedinGlyph className="h-4 w-4" /> LinkedIn
         </a>
-        <a className={`${linkBtn} col-span-2 bg-amber/15`} href={profile.cvPath} download>
-          <Download className="h-4 w-4" /> download my CV
+        <a className={`${linkBtn} col-span-2 bg-amber/15`} href={profile.cvPath} download="Reinbrandt_CV.pdf">
+          <Download className="h-4 w-4" /> download my CV (PDF)
+        </a>
+        <a className={`${linkBtn} col-span-2 text-xs text-neutral-600`} href={profile.cvGoogleDocs} target="_blank" rel="noreferrer">
+          <ExternalLink className="h-3.5 w-3.5" /> open Google Docs CV
         </a>
       </div>
     </div>
