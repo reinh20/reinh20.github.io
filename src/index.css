@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Lexend", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --color-ink: #2f2f33;
+  --color-amber: #f29a0e;
+  --color-sky: #a9d4fb;
+  --color-sky-deep: #8cc4f5;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin, unobtrusive scrollbar inside the window body */
+.window-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #c9c9cf transparent;
+}
+.window-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.window-scroll::-webkit-scrollbar-thumb {
+  background: #c9c9cf;
+  border-radius: 999px;
+}
+
+/* Hand-drawn feel: slight offset shadow under the line icons */
+.sketch-shadow {
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.12));
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+.twinkle {
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twinkle { animation: none; }
+}
+
