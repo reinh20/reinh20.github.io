@@ -72,3 +72,4 @@ The *"download my CV"* button will automatically download it.
 
 ## 📜 License
 Created by Reinbrandt Malikiyano Cahyono ([@reinh20](https://github.com/reinh20)).
+

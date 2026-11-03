@@ -4,7 +4,7 @@
 export const profile = {
   name: 'Reinbrandt Malikiyano Cahyono',
   nickname: 'rein',
-  tagline: 'software engineering intern — full stack, mobile & game systems',
+  tagline: 'full stack, mobile & game systems developer',
   location: 'East Java, Indonesia',
   email: 'reinbrandth20@gmail.com',
   github: 'https://github.com/reinh20',
@@ -17,7 +17,7 @@ export const profile = {
 export const about = [
   "Hi! I'm Rein, an Electrical Engineering student at Telkom University who ended up falling in love with software.",
   'I like building things end to end: REST APIs and admin panels, Android apps that talk to hardware over Bluetooth, and physics-driven game mechanics in Unity.',
-  'Right now I am looking for a Software Engineering Internship where I can ship real features and learn from a strong engineering team.',
+  'I enjoy building software where I can ship real features and collaborate with a strong engineering team.',
 ];
 
 export type Project = {

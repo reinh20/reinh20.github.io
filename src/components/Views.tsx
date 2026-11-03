@@ -186,7 +186,7 @@ export function ContactView() {
   return (
     <div className="flex h-full flex-col items-center justify-center px-6 py-8 text-center">
       <Heading>say hi</Heading>
-      <p className="max-w-xs text-sm text-neutral-600">Open to Software Engineering internships. My inbox is always open!</p>
+      <p className="max-w-xs text-sm text-neutral-600">Open for new opportunities and collaborations. My inbox is always open!</p>
 
       <button type="button" onClick={copyEmail} className="group mt-5 flex items-center gap-2 font-mono text-sm text-ink hover:text-amber">
         <Mail className="h-4 w-4" />
