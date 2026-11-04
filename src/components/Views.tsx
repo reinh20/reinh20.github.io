@@ -8,7 +8,7 @@ export type ViewId = 'home' | 'about' | 'work' | 'skills' | 'experience' | 'cont
 
 const menu: { id: Exclude<ViewId, 'home'>; label: string; Icon: (p: { className?: string }) => JSX.Element }[] = [
   { id: 'about', label: 'about', Icon: AboutIcon },
-  { id: 'work', label: 'work', Icon: WorkIcon },
+  { id: 'work', label: 'my work', Icon: WorkIcon },
   { id: 'skills', label: 'skills', Icon: SkillsIcon },
   { id: 'experience', label: 'journey', Icon: ExperienceIcon },
   { id: 'contact', label: 'contact', Icon: ContactIcon },
@@ -72,15 +72,20 @@ export function AboutView() {
 }
 
 export function WorkView() {
+  const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
+
   return (
     <div className="px-6 py-6 sm:px-8">
-      <Heading>selected work</Heading>
-      <ul className="space-y-4">
+      <Heading>my work</Heading>
+      <ul className="space-y-6">
         {projects.map((p) => (
-          <li key={p.title} className="rounded-md border-2 border-neutral-200 p-4 transition hover:border-amber/60 hover:shadow-[3px_3px_0_rgba(242,154,14,0.25)]">
+          <li
+            key={p.title}
+            className="overflow-hidden rounded-lg border-2 border-neutral-200 bg-white p-4 transition hover:border-amber/60 hover:shadow-[3px_3px_0_rgba(242,154,14,0.25)]"
+          >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h3 className="font-medium">
+                <h3 className="text-base font-medium text-ink">
                   <span className="mr-1.5">{p.emoji}</span>
                   {p.title}
                 </h3>
@@ -91,19 +96,56 @@ export function WorkView() {
                   href={p.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex shrink-0 items-center gap-1 rounded bg-ink px-2 py-1 font-mono text-[10px] text-white transition hover:bg-amber"
+                  className="flex shrink-0 items-center gap-1 rounded bg-ink px-2.5 py-1 font-mono text-[11px] text-white transition hover:bg-amber"
                 >
                   <GithubGlyph className="h-3 w-3" /> code
                 </a>
               )}
             </div>
-            <p className="mt-2 text-sm text-neutral-600">{p.summary}</p>
-            <ul className="mt-2 list-disc space-y-0.5 pl-4 text-xs text-neutral-500">
-              {p.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-            <div className="mt-3 flex flex-wrap gap-1">
+
+            {/* Proof Image / Foto Bukti Pengerjaan */}
+            {p.image && (
+              <div className="group relative mt-3 overflow-hidden rounded-md border border-neutral-200 bg-neutral-100">
+                <button
+                  type="button"
+                  onClick={() => setSelectedImage({ src: p.image!, title: p.title })}
+                  className="w-full cursor-zoom-in text-left"
+                  title="Klik untuk memperbesar foto bukti"
+                >
+                  <img
+                    src={p.image}
+                    alt={`Bukti pengerjaan ${p.title}`}
+                    className="max-h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                  <div className="absolute bottom-2 right-2 rounded bg-black/60 px-2 py-0.5 font-mono text-[10px] text-white backdrop-blur-sm opacity-90 transition-opacity group-hover:opacity-100">
+                    🔍 click to preview
+                  </div>
+                </button>
+              </div>
+            )}
+
+            {/* Deskripsi Proyek */}
+            {p.description ? (
+              <p className="mt-3 text-sm leading-relaxed text-neutral-700">{p.description}</p>
+            ) : (
+              <p className="mt-3 text-sm leading-relaxed text-neutral-600">{p.summary}</p>
+            )}
+
+            {/* Key Technical Highlights */}
+            {p.highlights && p.highlights.length > 0 && (
+              <div className="mt-3">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-400">Key Highlights</p>
+                <ul className="mt-1 list-disc space-y-1 pl-4 text-xs text-neutral-600">
+                  {p.highlights.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Tech Tags */}
+            <div className="mt-3.5 flex flex-wrap gap-1.5">
               {p.tags.map((t) => (
                 <Tag key={t}>{t}</Tag>
               ))}
@@ -111,7 +153,44 @@ export function WorkView() {
           </li>
         ))}
       </ul>
-      <a href={profile.github} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-1 font-mono text-xs text-neutral-500 hover:text-amber">
+
+      {/* Lightbox Modal for Proof Image */}
+      {selectedImage && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+        >
+          <div
+            className="relative max-h-[90vh] max-w-2xl overflow-hidden rounded-lg bg-white p-2 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-2 flex items-center justify-between px-2 pt-1 font-mono text-xs">
+              <span className="font-bold text-ink">{selectedImage.title}</span>
+              <button
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                className="rounded px-2 py-0.5 text-neutral-500 hover:bg-neutral-100 hover:text-ink font-bold"
+              >
+                ✕ Close
+              </button>
+            </div>
+            <img
+              src={selectedImage.src}
+              alt={selectedImage.title}
+              className="max-h-[75vh] w-auto rounded object-contain mx-auto"
+            />
+          </div>
+        </div>
+      )}
+
+      <a
+        href={profile.github}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-6 inline-flex items-center gap-1 font-mono text-xs text-neutral-500 hover:text-amber"
+      >
         more on github <ExternalLink className="h-3 w-3" />
       </a>
     </div>

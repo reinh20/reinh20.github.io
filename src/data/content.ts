@@ -24,61 +24,74 @@ export type Project = {
   title: string;
   role: string;
   summary: string;
+  description?: string;
   highlights: string[];
   tags: string[];
   github?: string;
   emoji: string;
+  image?: string;
 };
 
 export const projects: Project[] = [
   {
-    title: 'Web IKA JTK Polban',
-    role: 'Full Stack Developer · Internship @ Digital Oasis',
-    summary: 'Alumni platform for JTK Polban: PHP REST API, React/TypeScript CMS and a Flutter Web portal on PostgreSQL.',
+    title: 'WHAT IS UP THERE',
+    role: 'Gameplay & Systems Developer · BZI Game Jam',
+    summary: 'First-person 3D parkour and psychological hazard platformer built with Unity 6 and C#.',
+    description: 'Designed and implemented full kinematic player movement including slope handling, raycast wall-running with normal projection, SpringJoint Hooke\'s law grappling hook with aim assist, synchronized FSM enemy hazards, and custom Unity Editor tools for automated level setup.',
     highlights: [
-      'Built an E-Voting module with 15-second HTTP polling for live results and one-account-one-vote rules',
-      'Client-side image crop & compression: uploads up to 50MB reduced to under 5MB before hitting the server',
-      'Masked raw API errors behind safe, standardized responses',
+      'Engineered momentum-based rigidbody locomotion with slide boosts and slope normal compensation',
+      'Implemented dynamic wall-running and multi-vector impulse wall jumping with camera roll interpolation',
+      'Built a SpringJoint grappling hook simulating Hooke\'s law paired with a 3D SphereCast aim-assist system',
+      'Developed synchronized line-of-sight hazard AI (FSM) and custom Unity Editor lighting setup tools',
     ],
-    tags: ['PHP', 'React', 'TypeScript', 'Flutter', 'PostgreSQL', 'Docker'],
+    tags: ['Unity 6', 'C#', '3D Kinematics', 'Hooke\'s Law', 'FSM AI', 'Editor Tooling'],
+    github: 'https://github.com/reinh20/WHAT-IS-UP-THERE',
+    emoji: '🎃',
+    image: './projects/what-is-up-there.png',
+  },
+  {
+    title: 'Web IKA JTK Polban',
+    role: 'Full Stack Developer · Internship @ PT. Pilar Timur Teknologi',
+    summary: 'Enterprise alumni platform and electronic voting ecosystem for JTK Polban alumni.',
+    description: 'Developed an integrated three-tier platform consisting of a PHP RESTful API, React/TypeScript CMS Admin Panel, and Flutter Web portal backed by PostgreSQL. Addressed upload bandwidth bottlenecks with GPU Skia and HTML5 Canvas compression.',
+    highlights: [
+      'Architected full-stack E-Voting system with 15-second async HTTP polling and concurrency safeguards',
+      'Distributed image downscaling to client-side (GPU Skia & HTML5 Canvas), reducing 50MB uploads to <5MB',
+      'Hardened backend API controllers by implementing standardized error masking and structured logging',
+      'Built membership onboarding with OTP email verification, career board, and dynamic CMS settings',
+    ],
+    tags: ['PHP', 'React', 'TypeScript', 'Flutter Web', 'PostgreSQL', 'Docker', 'REST API'],
     github: 'https://github.com/reinh20/Web_IKA_JTK-',
     emoji: '🗳️',
+    image: './projects/ika-jtk.png',
   },
   {
     title: 'SmartKey Gait Analysis',
-    role: 'Mobile App Developer',
-    summary: 'Android companion app for a smart key that authenticates users by their walking pattern.',
+    role: 'Mobile Application & UI Developer',
+    summary: 'Cross-platform Android companion app for a smart biometric access key.',
+    description: 'Developed the client-side Android application architecture, responsive user interface panels, interactive button states, and real-time telemetry dashboards using React 18, TypeScript, TailwindCSS, and Capacitor 8.',
     highlights: [
-      'Built the app UI, buttons and flows with React, TypeScript and Capacitor',
-      'Bluetooth Low Energy connection to the device and local SQLite logs',
-      'The gait ML model itself was built by teammates — my scope was the app',
+      'Engineered mobile client interface, touch interactions, modal dialogs, and sensor radar screens',
+      'Integrated Bluetooth Low Energy (BLE) scanning, device pairing workflows, and message handling',
+      'Implemented offline-first SQLite local caching for telemetry audit logs and session history export',
+      'Clear separation of concerns: focused on application and device UI (gait ML model developed by AI team)',
     ],
-    tags: ['React', 'TypeScript', 'Capacitor', 'BLE', 'SQLite', 'Android'],
+    tags: ['React 18', 'TypeScript', 'Capacitor 8', 'BLE', 'SQLite', 'TailwindCSS', 'Android'],
     github: 'https://github.com/reinh20/SmartKey-App',
     emoji: '🔑',
-  },
-  {
-    title: 'WHAT IS UP THERE',
-    role: 'Solo Developer · BZI Game Jam',
-    summary: 'First-person physics platformer about climbing towards the sky while dodging haunted pumpkins.',
-    highlights: [
-      'Rigidbody movement with sliding, wall-running and wall-jumps',
-      'Grappling hook built on SpringJoint physics with SphereCast aim assist',
-      'State-machine enemies, checkpoints, bilingual UI and custom editor tools',
-    ],
-    tags: ['Unity 6', 'C#', 'Physics', 'FSM'],
-    github: 'https://github.com/reinh20/WHAT-IS-UP-THERE',
-    emoji: '🎃',
+    image: './projects/smartkey.png',
   },
   {
     title: 'IoT DC Motor Monitoring',
-    role: 'IoT Developer',
-    summary: 'Real-time motor telemetry pipeline on ESP32 boards.',
+    role: 'IoT & Embedded Software Developer',
+    summary: 'Real-time multi-layered motor telemetry communication and monitoring pipeline on ESP32 microcontrollers.',
+    description: 'Engineered a telemetry pipeline capturing motor RPM, current, voltage, and thermal parameters with local node-to-gateway ESP-NOW protocol and MQTT cloud publishing, visualized through a real-time Graphical User Interface.',
     highlights: [
-      'ESP-NOW for node-to-gateway links and MQTT (HiveMQ) for the cloud',
-      'GUI showing RPM, current, voltage and temperature live',
+      'Implemented dual-layer network protocols: ESP-NOW for local low-latency links and MQTT via HiveMQ for cloud',
+      'Developed real-time Graphical User Interface (GUI) visualizing multi-threaded motor performance metrics',
+      'Integrated precision sensors with hardware telemetry streams for live anomaly tracking',
     ],
-    tags: ['ESP32', 'C++', 'MQTT', 'ESP-NOW'],
+    tags: ['ESP32', 'C/C++', 'MQTT', 'ESP-NOW', 'HiveMQ', 'Python GUI'],
     emoji: '⚙️',
   },
 ];

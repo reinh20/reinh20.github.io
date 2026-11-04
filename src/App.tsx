@@ -11,7 +11,7 @@ import { profile } from './data/content';
 const titles: Record<ViewId, string> = {
   home: 'home',
   about: 'about',
-  work: 'work',
+  work: 'my work',
   skills: 'skills',
   experience: 'journey',
   contact: 'contact',
