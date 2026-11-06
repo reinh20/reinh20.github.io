@@ -117,7 +117,7 @@ function ProjectCard({
               <img
                 src={currentImg}
                 alt={`Bukti pengerjaan ${p.title}`}
-                className="max-h-60 w-full object-contain mx-auto transition-transform duration-300 group-hover:scale-[1.02]"
+                className="max-h-72 sm:max-h-84 w-full object-contain mx-auto transition-transform duration-300 group-hover:scale-[1.02]"
                 loading="lazy"
               />
               <div className="absolute bottom-2 right-2 flex items-center gap-1 rounded bg-black/75 px-2 py-0.5 font-mono text-[10px] text-white backdrop-blur-sm opacity-90 transition-opacity group-hover:opacity-100">
@@ -150,24 +150,25 @@ function ProjectCard({
         </div>
       )}
 
-      {/* Deskripsi Proyek */}
-      {p.description ? (
-        <p className="mt-3 text-sm leading-relaxed text-neutral-700">{p.description}</p>
-      ) : (
-        <p className="mt-3 text-sm leading-relaxed text-neutral-600">{p.summary}</p>
-      )}
-
-      {/* Key Technical Highlights */}
-      {p.highlights && p.highlights.length > 0 && (
-        <div className="mt-3">
-          <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-400">Key Highlights</p>
-          <ul className="mt-1 list-disc space-y-1 pl-4 text-xs text-neutral-600">
-            {p.highlights.map((h) => (
-              <li key={h}>{h}</li>
-            ))}
-          </ul>
+      {/* Deskripsi & Highlights (2-Kolom responsif di kanvas besar) */}
+      <div className="mt-3.5 grid gap-4 sm:grid-cols-2">
+        <div>
+          <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-400">Overview</p>
+          <p className="mt-1 text-sm leading-relaxed text-neutral-700">
+            {p.description || p.summary}
+          </p>
         </div>
-      )}
+        {p.highlights && p.highlights.length > 0 && (
+          <div>
+            <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-400">Key Highlights</p>
+            <ul className="mt-1 list-disc space-y-1 pl-4 text-xs text-neutral-600">
+              {p.highlights.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
 
       {/* Tech Tags */}
       <div className="mt-3.5 flex flex-wrap gap-1.5">

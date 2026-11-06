@@ -68,7 +68,12 @@ export default function App() {
 
       <main className="flex flex-1 items-center justify-center px-4 pb-24 pt-24">
         <motion.div className="w-full" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <RetroWindow title={titles[view]} canGoBack={view !== 'home'} onBack={() => open('home')}>
+          <RetroWindow
+            title={titles[view]}
+            canGoBack={view !== 'home'}
+            onBack={() => open('home')}
+            isExpanded={view === 'work'}
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={view}
