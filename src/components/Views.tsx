@@ -71,6 +71,114 @@ export function AboutView() {
   );
 }
 
+function ProjectCard({
+  p,
+  onZoom,
+}: {
+  p: (typeof projects)[number];
+  onZoom: (img: { src: string; title: string }) => void;
+}) {
+  const images = p.gallery && p.gallery.length > 0 ? p.gallery : p.image ? [p.image] : [];
+  const [activeIdx, setActiveIdx] = useState(0);
+  const currentImg = images[activeIdx] || p.image;
+
+  return (
+    <li className="overflow-hidden rounded-lg border-2 border-neutral-200 bg-white p-4 transition hover:border-amber/60 hover:shadow-[3px_3px_0_rgba(242,154,14,0.25)]">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="text-base font-medium text-ink">
+            <span className="mr-1.5">{p.emoji}</span>
+            {p.title}
+          </h3>
+          <p className="font-mono text-[11px] text-amber">{p.role}</p>
+        </div>
+        {p.github && (
+          <a
+            href={p.github}
+            target="_blank"
+            rel="noreferrer"
+            className="flex shrink-0 items-center gap-1 rounded bg-ink px-2.5 py-1 font-mono text-[11px] text-white transition hover:bg-amber"
+          >
+            <GithubGlyph className="h-3 w-3" /> code
+          </a>
+        )}
+      </div>
+
+      {/* Proof Image / Gallery */}
+      {currentImg && (
+        <div className="mt-3 space-y-2">
+          <div className="group relative overflow-hidden rounded-md border border-neutral-200 bg-neutral-900">
+            <button
+              type="button"
+              onClick={() => onZoom({ src: currentImg, title: `${p.title} (${activeIdx + 1}/${images.length})` })}
+              className="block w-full cursor-zoom-in text-left"
+              title="Klik untuk memperbesar foto bukti"
+            >
+              <img
+                src={currentImg}
+                alt={`Bukti pengerjaan ${p.title}`}
+                className="max-h-60 w-full object-contain mx-auto transition-transform duration-300 group-hover:scale-[1.02]"
+                loading="lazy"
+              />
+              <div className="absolute bottom-2 right-2 flex items-center gap-1 rounded bg-black/75 px-2 py-0.5 font-mono text-[10px] text-white backdrop-blur-sm opacity-90 transition-opacity group-hover:opacity-100">
+                <span>🔍 preview</span>
+                {images.length > 1 && <span>• {activeIdx + 1}/{images.length}</span>}
+              </div>
+            </button>
+          </div>
+
+          {/* Thumbnails row if multiple images exist */}
+          {images.length > 1 && (
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5">
+              {images.map((img, idx) => (
+                <button
+                  key={img}
+                  type="button"
+                  onClick={() => setActiveIdx(idx)}
+                  className={`relative h-12 w-16 shrink-0 overflow-hidden rounded border-2 transition ${
+                    activeIdx === idx
+                      ? 'border-amber shadow-[0_0_0_2px_rgba(242,154,14,0.3)]'
+                      : 'border-neutral-300 opacity-60 hover:opacity-100'
+                  }`}
+                  title={`Lihat foto ${idx + 1}`}
+                >
+                  <img src={img} alt={`Thumb ${idx + 1}`} className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Deskripsi Proyek */}
+      {p.description ? (
+        <p className="mt-3 text-sm leading-relaxed text-neutral-700">{p.description}</p>
+      ) : (
+        <p className="mt-3 text-sm leading-relaxed text-neutral-600">{p.summary}</p>
+      )}
+
+      {/* Key Technical Highlights */}
+      {p.highlights && p.highlights.length > 0 && (
+        <div className="mt-3">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-400">Key Highlights</p>
+          <ul className="mt-1 list-disc space-y-1 pl-4 text-xs text-neutral-600">
+            {p.highlights.map((h) => (
+              <li key={h}>{h}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Tech Tags */}
+      <div className="mt-3.5 flex flex-wrap gap-1.5">
+        {p.tags.map((t) => (
+          <Tag key={t}>{t}</Tag>
+        ))}
+      </div>
+    </li>
+  );
+}
+
 export function WorkView() {
   const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
 
@@ -79,78 +187,7 @@ export function WorkView() {
       <Heading>my work</Heading>
       <ul className="space-y-6">
         {projects.map((p) => (
-          <li
-            key={p.title}
-            className="overflow-hidden rounded-lg border-2 border-neutral-200 bg-white p-4 transition hover:border-amber/60 hover:shadow-[3px_3px_0_rgba(242,154,14,0.25)]"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <h3 className="text-base font-medium text-ink">
-                  <span className="mr-1.5">{p.emoji}</span>
-                  {p.title}
-                </h3>
-                <p className="font-mono text-[11px] text-amber">{p.role}</p>
-              </div>
-              {p.github && (
-                <a
-                  href={p.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex shrink-0 items-center gap-1 rounded bg-ink px-2.5 py-1 font-mono text-[11px] text-white transition hover:bg-amber"
-                >
-                  <GithubGlyph className="h-3 w-3" /> code
-                </a>
-              )}
-            </div>
-
-            {/* Proof Image / Foto Bukti Pengerjaan */}
-            {p.image && (
-              <div className="group relative mt-3 overflow-hidden rounded-md border border-neutral-200 bg-neutral-100">
-                <button
-                  type="button"
-                  onClick={() => setSelectedImage({ src: p.image!, title: p.title })}
-                  className="w-full cursor-zoom-in text-left"
-                  title="Klik untuk memperbesar foto bukti"
-                >
-                  <img
-                    src={p.image}
-                    alt={`Bukti pengerjaan ${p.title}`}
-                    className="max-h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                    loading="lazy"
-                  />
-                  <div className="absolute bottom-2 right-2 rounded bg-black/60 px-2 py-0.5 font-mono text-[10px] text-white backdrop-blur-sm opacity-90 transition-opacity group-hover:opacity-100">
-                    🔍 click to preview
-                  </div>
-                </button>
-              </div>
-            )}
-
-            {/* Deskripsi Proyek */}
-            {p.description ? (
-              <p className="mt-3 text-sm leading-relaxed text-neutral-700">{p.description}</p>
-            ) : (
-              <p className="mt-3 text-sm leading-relaxed text-neutral-600">{p.summary}</p>
-            )}
-
-            {/* Key Technical Highlights */}
-            {p.highlights && p.highlights.length > 0 && (
-              <div className="mt-3">
-                <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-400">Key Highlights</p>
-                <ul className="mt-1 list-disc space-y-1 pl-4 text-xs text-neutral-600">
-                  {p.highlights.map((h) => (
-                    <li key={h}>{h}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Tech Tags */}
-            <div className="mt-3.5 flex flex-wrap gap-1.5">
-              {p.tags.map((t) => (
-                <Tag key={t}>{t}</Tag>
-              ))}
-            </div>
-          </li>
+          <ProjectCard key={p.title} p={p} onZoom={setSelectedImage} />
         ))}
       </ul>
 

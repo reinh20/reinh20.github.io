@@ -30,6 +30,7 @@ export type Project = {
   github?: string;
   emoji: string;
   image?: string;
+  gallery?: string[];
 };
 
 export const projects: Project[] = [
@@ -47,7 +48,13 @@ export const projects: Project[] = [
     tags: ['Unity 6', 'C#', '3D Kinematics', 'Hooke\'s Law', 'FSM AI', 'Editor Tooling'],
     github: 'https://github.com/reinh20/WHAT-IS-UP-THERE',
     emoji: '🎃',
-    image: './projects/what-is-up-there.png',
+    image: './projects/what-is-up-there-title.jpg',
+    gallery: [
+      './projects/what-is-up-there-title.jpg',
+      './projects/what-is-up-there-gameplay.jpg',
+      './projects/what-is-up-there-map.jpg',
+      './projects/what-is-up-there-side.png',
+    ],
   },
   {
     title: 'Web IKA JTK Polban',
