@@ -70,7 +70,14 @@ export const projects: Project[] = [
     tags: ['PHP', 'React', 'TypeScript', 'Flutter Web', 'PostgreSQL', 'Docker', 'REST API'],
     github: 'https://github.com/reinh20/Web_IKA_JTK-',
     emoji: '🗳️',
-    image: './projects/ika-jtk.png',
+    image: './projects/ika-jtk-home.jpg',
+    gallery: [
+      './projects/ika-jtk-home.jpg',
+      './projects/ika-jtk-cms-loker.png',
+      './projects/ika-jtk-portal-loker.png',
+      './projects/ika-jtk-berita.png',
+      './projects/ika-jtk-agenda.png',
+    ],
   },
   {
     title: 'SmartKey Gait Analysis',
