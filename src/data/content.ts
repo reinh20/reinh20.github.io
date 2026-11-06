@@ -93,7 +93,12 @@ export const projects: Project[] = [
     tags: ['React 18', 'TypeScript', 'Capacitor 8', 'BLE', 'SQLite', 'TailwindCSS', 'Android'],
     github: 'https://github.com/reinh20/SmartKey-App',
     emoji: '🔑',
-    image: './projects/smartkey.png',
+    image: './projects/smartkey-telemetry.jpg',
+    gallery: [
+      './projects/smartkey-telemetry.jpg',
+      './projects/smartkey-logs.jpg',
+      './projects/smartkey-modals.jpg',
+    ],
   },
   {
     title: 'IoT DC Motor Monitoring',
